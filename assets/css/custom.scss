@@ -1,0 +1,29 @@
+/*  ---------- Center avatar in left sidebar (Chirpy) ---------- */
+
+/* 1) Ensure the sidebar profile wrapper spans full width and centers its contents */
+#sidebar .profile-wrapper {
+  width: 100%;
+  display: flex;          /* use flexbox to control alignment */
+  justify-content: center;/* center horizontally */
+  align-items: center;    /* center vertically inside the wrapper */
+  padding-left: 0;        /* adjust if needed */
+  padding-right: 0;       /* adjust if needed */
+}
+
+/* 2) Make sure the avatar link/image doesn't keep an unwanted float or margins */
+#sidebar #avatar,
+#sidebar #avatar img {
+  margin: 0;              /* remove stray margins */
+  display: block;
+  max-width: 100%;        /* responsive */
+  width: 112px;           /* keep the theme's default size or set your preferred */
+  height: 112px;
+  object-fit: cover;      /* ensure image fills the circle */
+}
+
+/* 3) If the sidebar has a flex utility class forcing right alignment (.align-items-end),
+   override that just for the sidebar to avoid affecting other components */
+#sidebar.align-items-end {
+  align-items: center !important;
+}
+
