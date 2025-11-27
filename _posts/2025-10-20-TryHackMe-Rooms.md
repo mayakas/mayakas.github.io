@@ -3,7 +3,7 @@ title: "Why Every Cybersecurity Learner Should Use TryHackMe"
 author: "Mayaka Justine"
 date: "2025-11-27"
 categories: [Cybersecurity,Learning,TryHackMe]
-tags:[THM,penetration-testing,hands-on-labs,cybersecurity-training]
+tags: [THM,penetration-testing,hands-on-labs,cybersecurity-training]
 summary: "A cybersecurity expert explains why TryHackMe’s hands-on rooms are essential for developing real-world skills."
 reading_time: "3 minutes"
 
