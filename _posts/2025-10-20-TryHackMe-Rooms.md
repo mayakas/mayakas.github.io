@@ -1,3 +1,22 @@
+---
+title: "Why Every Cybersecurity Learner Should Use TryHackMe"
+author: "Mayaka Justine"
+date: "2025-11-27"
+categories:
+  - Cybersecurity
+  - Learning
+  - TryHackMe
+tags:
+  - THM
+  - penetration-testing
+  - hands-on-labs
+  - cybersecurity-training
+summary: "A cybersecurity expert explains why TryHackMe’s hands-on rooms are essential for developing real-world skills."
+featured_image: "/assets/images/tryhackme-learning.jpg"
+reading_time: "3 minutes"
+
+---
+
 In the world of cybersecurity, theory alone is never enough.
 Real skill comes from doing, experimenting, breaking things, and fixing them again.
 That’s exactly why TryHackMe has become one of the most powerful learning tools available to aspiring security professionals.
