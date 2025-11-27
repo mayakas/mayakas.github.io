@@ -5,7 +5,6 @@ order: 4
 
 layout: page
 title: "Cybersecurity Portfolio & Resume"
-permalink: /portfolio/
 description: "A professional cybersecurity portfolio showcasing academic background, skills, projects, and hands-on lab challenges."
 author: "Mayaka Justine"
 tags:
@@ -106,7 +105,7 @@ Nmap, RustScan, Nikto
 
 **GitHub:** *https://github.com/your-project-link*  
 **Screenshot:**  
-![Screenshot](images/project1.png)
+# ![Screenshot](images/project1.png)
 
 ---
 
@@ -125,7 +124,7 @@ Python, SQLite, Hashlib
 
 **GitHub:** *https://github.com/your-project-link*  
 **Screenshot:**  
-![Screenshot](images/project2.png)
+# ![Screenshot](images/project2.png)
 
 ---
 
@@ -138,7 +137,7 @@ A tool that automates subdomain discovery.
 Python, FFUF, Subfinder APIs
 
 **Screenshot:**  
-![Screenshot](images/project3.png)
+# ![Screenshot](images/project3.png)
 
 ---
 
@@ -165,7 +164,7 @@ Nmap, Hydra, Gobuster, Linux PrivEsc techniques
 - Misconfigurations often lead to privilege escalation  
 
 **Screenshot:**  
-![Lab1](images/lab1.png)
+# ![Lab1](images/lab1.png)
 
 ---
 
@@ -187,7 +186,7 @@ FFUF, SecLists
 - Targeted wordlists improve accuracy  
 
 **Screenshot:**  
-![Lab2](images/lab2.png)
+# ![Lab2](images/lab2.png)
 
 ---
 
@@ -210,7 +209,7 @@ FFUF, Burp Suite, Browser Dev Tools
 - Manual SQLi analysis improves understanding  
 
 **Screenshot:**  
-![Lab3](images/lab3.png)
+# ![Lab3](images/lab3.png)
 
 ---
 
