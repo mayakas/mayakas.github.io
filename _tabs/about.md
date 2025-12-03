@@ -49,7 +49,7 @@ Application Security
 [Endpoint Security](https://www.credly.com/badges/4b73576b-7b13-4f5b-a3b5-11f3e721cdfc)\
 [Networking Devices and Initial Configuration](https://www.credly.com/badges/de89aca0-7b64-4aa0-a677-2be06fb27f06)\
 [Networking Basics](https://www.credly.com/badges/03bdf171-b7c5-437b-b89d-204c4384e4e3/)\
-[Introduction to Cybersecurity](https://www.credly.com/badges/a3ee16fd-6aa6-4cb1-a81c-2013312425e3/)\
+[Introduction to Cybersecurity](https://www.credly.com/badges/a3ee16fd-6aa6-4cb1-a81c-2013312425e3/)
 
 
 
