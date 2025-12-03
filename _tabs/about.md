@@ -43,8 +43,15 @@ Enumeration & Reconnaissance\
 Application Security
 
 
-**Certifications**
+**Certifications**\
 [Deloitte Australia - Cyber Job Simulation](https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/E9pA6qsdbeyEkp3ti_9PBTqmSxAf6zZTseP_6912651ab5feac8bfe653e7c_1762852185395_completion_certificate.pdf)\
+[Mastercard - Cybersecurity Job Simulation](https://www.theforage.com/completion-certificates/mfxGwGDp6WkQmtmTf/vcKAB5yYAgvemepGQ_mfxGwGDp6WkQmtmTf_6912651ab5feac8bfe653e7c_1763456375335_completion_certificate.pdf)\
+[Endpoint Security](https://www.credly.com/badges/4b73576b-7b13-4f5b-a3b5-11f3e721cdfc)\
+[Networking Devices and Initial Configuration](https://www.credly.com/badges/de89aca0-7b64-4aa0-a677-2be06fb27f06)\
+[Networking Basics](https://www.credly.com/badges/03bdf171-b7c5-437b-b89d-204c4384e4e3/)\
+[Introduction to Cybersecurity](https://www.credly.com/badges/a3ee16fd-6aa6-4cb1-a81c-2013312425e3/)\
+
+
 
 
 ---
