@@ -3,7 +3,7 @@
 icon: fas fa-info-circle
 order: 4
 layout: page
-title: "Cybersecurity Portfolio & Resume"
+title: "Portfolio & Resume"
 description: "A professional cybersecurity portfolio showcasing academic background, skills, projects, and hands-on lab challenges."
 author: "Mayaka Justine"
 tags:
@@ -14,11 +14,7 @@ tags:
   - resume
 ---
 
-# 🧑‍💼 Cybersecurity Portfolio & Resume
-
----
-
-## 🎓 Academic Background
+## Education
 
 | Institution | Degree | Years |
 |------------|--------|--------|
@@ -26,3 +22,7 @@ tags:
 | **Kisii School** | Kenya Certificate of Secondary Education | 2012-2015 |
 
 ---
+## Experience
+
+---
+## Projects
