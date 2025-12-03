@@ -42,5 +42,10 @@ Metasploit Framework\
 Enumeration & Reconnaissance\
 Application Security
 
+
+**Certifications**
+[Deloitte Australia - Cyber Job Simulation](https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/E9pA6qsdbeyEkp3ti_9PBTqmSxAf6zZTseP_6912651ab5feac8bfe653e7c_1762852185395_completion_certificate.pdf)\
+
+
 ---
 ## Projects
