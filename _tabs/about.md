@@ -23,23 +23,25 @@ tags:
 
 ---
 ## Experience
-**2025-Present**
+**2025-Present**\
 
-Independent Cybersecurity Practitioner.
-Platform & Environment: Self-Directed Labs-TryHackMe & Metasploitable Labs
-1.Completed 50+ TryHackMe rooms focused on network security, web application exploitation, and post-exploitation.
-2.Conducted isolated lab exercises on Metasploitable VMs to practice vulnerability discovery, Metasploit exploitation, and privilege escalation.
-3.Tools & techniques used: Nmap, Hydra, Metasploit Framework, netcat, Bash and Python scripting.
-4.Completed 50+ TryHackMe rooms focused on network security, web application exploitation, and post-exploitation.
-5.Conducted isolated lab exercises on Metasploitable VMs to practice vulnerability discovery, Metasploit exploitation, and privilege escalation.
 
-Skills:
-Vulnerability Assessment and Penetration Testing (VAPT)
-Linux System Administration
-Technical Report Writing
-Network Scanning (Nmap)
-Metasploit Framework
-Enumeration & Reconnaissance
+Independent Cybersecurity Practitioner.\
+Platform & Environment: Self-Directed Labs-TryHackMe & Metasploitable Labs\
+1.Completed 50+ TryHackMe rooms focused on network security, web application exploitation, and post-exploitation.\
+2.Conducted isolated lab exercises on Metasploitable VMs to practice vulnerability discovery, Metasploit exploitation, and privilege escalation.\
+3.Tools & techniques used: Nmap, Hydra, Metasploit Framework, netcat, Bash and Python scripting.\
+4.Completed 50+ TryHackMe rooms focused on network security, web application exploitation, and post-exploitation.\
+5.Conducted isolated lab exercises on Metasploitable VMs to practice vulnerability discovery, Metasploit exploitation, and privilege escalation.\
+
+
+Skills:\
+Vulnerability Assessment and Penetration Testing (VAPT)\
+Linux System Administration\
+Technical Report Writing\
+Network Scanning (Nmap)\
+Metasploit Framework\
+Enumeration & Reconnaissance\
 Application Security
 
 ---
