@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sauro Mayaka — Jr. Penetration Tester</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface-2: #1a1a26;
+      --border: #1e1e2e;
+      --primary: #00ff9d;
+      --primary-dim: rgba(0, 255, 157, 0.08);
+      --primary-mid: rgba(0, 255, 157, 0.15);
+      --text: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --muted: #4a5568;
+      --danger: #ff6b6b;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-display);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10, 10, 15, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--primary);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-logo span { color: var(--muted); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.35;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 40%, transparent 100%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,255,157,0.06) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-prompt {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .prompt-symbol { color: var(--muted); }
+
+    .hero-name {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .hero-role-line {
+      font-family: var(--font-mono);
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      min-height: 2em;
+    }
+
+    .hero-role-label {
+      color: var(--primary);
+      font-weight: 200;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background: var(--primary);
+      margin-left: 3px;
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-tagline {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #0a0a0f;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background: #00e88a;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(0,255,157,0.25);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-dim);
+      transform: translateY(-1px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .stat-item {}
+
+    .stat-num {
+      font-family: var(--font-mono);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 5rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--primary);
+      letter-spacing: 0.12em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-eyebrow::before {
+      content: '//';
+      color: var(--muted);
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-top: 2.5rem;
+    }
+
+    .about-text p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    .about-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .meta-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+
+    .meta-card-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.4rem;
+    }
+
+    .meta-card-value {
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .meta-card-value a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .meta-card-value a:hover { text-decoration: underline; }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .skill-group:hover { border-color: rgba(0,255,157,0.3); }
+
+    .skill-group-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--primary);
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .skill-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 0.25rem 0.6rem;
+    }
+
+    /* ── EXPERIENCE ── */
+    .timeline {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .timeline-item:last-child { border-bottom: none; }
+
+    .timeline-date {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      padding-top: 0.2rem;
+      line-height: 1.5;
+    }
+
+    .timeline-content {}
+
+    .timeline-role {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.15rem;
+    }
+
+    .timeline-org {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .timeline-desc ul {
+      padding-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    .timeline-desc li { margin-bottom: 0.3rem; }
+
+    /* ── CERTS ── */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      transition: border-color 0.2s;
+    }
+
+    .cert-card:hover { border-color: rgba(0,255,157,0.3); }
+
+    .cert-icon {
+      font-size: 1.2rem;
+      margin-top: 0.1rem;
+      flex-shrink: 0;
+    }
+
+    .cert-name {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .cert-issuer {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ── CREATIVE ── */
+    .creative-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .creative-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem 1.5rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .creative-card:hover {
+      border-color: rgba(0,255,157,0.3);
+      background: var(--surface-2);
+    }
+
+    .creative-card-icon {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .creative-card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .creative-card-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .creative-stat {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--primary);
+      margin-top: 0.75rem;
+    }
+
+    /* ── CONTACT ── */
+    .contact-inner {
+      margin-top: 2.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .contact-inner p {
+      color: var(--text-secondary);
+      max-width: 420px;
+      margin: 0.75rem auto 2rem;
+      line-height: 1.7;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .contact-link {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all 0.2s;
+      letter-spacing: 0.05em;
+    }
+
+    .contact-link:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      background: var(--primary-dim);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.65rem; }
+
+      section { padding: 4rem 1.25rem; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+      .timeline-item { grid-template-columns: 1fr; gap: 0.25rem; }
+      .timeline-date { padding-top: 0; }
+
+      .creative-grid { grid-template-columns: 1fr; }
+
+      .contact-inner { padding: 2rem 1.5rem; }
+
+      .hero-stats { gap: 1.5rem; }
+    }
+
+    @media (max-width: 420px) {
+      .nav-links { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cursor { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo"><span>~/</span>sauro<span>$</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#creative">creative</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" style="max-width:100%; padding-left: 2rem; padding-right: 2rem;">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-prompt">
+        <span class="prompt-symbol">$</span> whoami
+      </div>
+      <h1 class="hero-name">Sauro Mayaka</h1>
+      <div class="hero-role-line">
+        <span class="hero-role-label" id="typed-role"></span><span class="cursor"></span>
+      </div>
+      <p class="hero-tagline">
+        IT professional and ethical hacker based in Nairobi, Kenya. I break systems to make them stronger and capture the world through a lens when I'm done.
+      </p>
+      <div class="hero-cta">
+        <a href="#experience" class="btn btn-primary">View Experience</a>
+        <a href="#contact" class="btn btn-outline">Get In Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">50+</span>
+          <span class="stat-label">TryHackMe Rooms</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">5yr</span>
+          <span class="stat-label">Security Practice</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">20M+</span>
+          <span class="stat-label">TikTok Views</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">270K+</span>
+          <span class="stat-label">Social Followers</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-eyebrow">about</div>
+    <h2>Tech-Driven. Creatively Wired.</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I hold a BSc in Information Technology from Multimedia University of Kenya and recently completed the Ethical Hacker certification program through the Cybershujaa programme at USIU-Africa, building systematic skills in vulnerability assessment, penetration testing, and network security.
+        </p>
+        <p>
+          What sets me apart is a rare combination: the analytical precision of a security practitioner and the visual instincts of a professional photographer and editor. I have spent five years running my own photography business, building a high-engagement content operation, and co-founding a wellness brand each role sharpening different dimensions of the same drive to create things that work and look right.
+        </p>
+        <p>
+          Currently seeking a junior penetration testing or IT security role where I can bring curiosity, discipline, and a genuine passion for breaking things responsibly.
+        </p>
+      </div>
+      <div class="about-meta">
+        <div class="meta-card">
+          <div class="meta-card-label">LOCATION</div>
+          <div class="meta-card-value">Nairobi County, Kenya</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-card-label">EMAIL</div>
+          <div class="meta-card-value"><a href="mailto:mayakajustin@gmail.com">mayakajustin@gmail.com</a></div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-card-label">LINKEDIN</div>
+          <div class="meta-card-value"><a href="https://www.linkedin.com/in/mayakas" target="_blank">/in/mayakas</a></div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-card-label">TRYHACKME</div>
+          <div class="meta-card-value"><a href="https://tryhackme.com/p/mayakas" target="_blank">tryhackme.com/p/mayakas</a></div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-card-label">LANGUAGES</div>
+          <div class="meta-card-value">English · Swahili · Spanish (basic)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-eyebrow">skills</div>
+    <h2>Tools of the Trade</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-label">OFFENSIVE SECURITY</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Nmap</span>
+          <span class="skill-tag">Metasploit</span>
+          <span class="skill-tag">Hydra</span>
+          <span class="skill-tag">netcat</span>
+          <span class="skill-tag">VAPT</span>
+          <span class="skill-tag">Privilege Escalation</span>
+          <span class="skill-tag">Web App Exploitation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">INFRASTRUCTURE</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Linux Admin</span>
+          <span class="skill-tag">Network Config</span>
+          <span class="skill-tag">Endpoint Security</span>
+          <span class="skill-tag">Hardware Setup</span>
+          <span class="skill-tag">IT Support</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">DEVELOPMENT</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Bash Scripting</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Mobile Apps</span>
+          <span class="skill-tag">Technical Reports</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">CREATIVE</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Adobe Illustrator</span>
+          <span class="skill-tag">SEO</span>
+          <span class="skill-tag">Adobe Lightroom</span>
+          <span class="skill-tag">Canva</span>
+          <span class="skill-tag">Adobe Photoshop</span>
+          <span class="skill-tag">Video Editing</span>
+          <span class="skill-tag">Adobe Premiere Pro</span>
+          <span class="skill-tag">Photography</span>
+          <span class="skill-tag">Color Grading</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-eyebrow">experience</div>
+    <h2>Where I've Worked</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-date">Jan 2025 — Present</div>
+        <div class="timeline-content">
+          <div class="timeline-role">Independent Cybersecurity Practitioner</div>
+          <div class="timeline-org">Self-Directed Labs — TryHackMe &amp; Metasploitable</div>
+          <div class="timeline-desc">
+            <ul>
+              <li>Completed 50+ rooms covering network security, web application exploitation, and post-exploitation techniques.</li>
+              <li>Conducted isolated VM labs on Metasploitable — practicing vulnerability discovery, Metasploit exploitation, and privilege escalation.</li>
+              <li>Core toolset: Nmap, Hydra, Metasploit Framework, netcat, Bash and Python scripting.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Jan 2021 — Present</div>
+        <div class="timeline-content">
+          <div class="timeline-role">Founder &amp; Lead Photographer</div>
+          <div class="timeline-org">The Photographa</div>
+          <div class="timeline-desc">
+            Built and scaled an independent photography business specialising in product, event, and portrait work. Developed end-to-end client workflows — from brief to final delivery — and advanced post-production skills in editing, retouching, and colour correction.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Aug 2022 — Dec 2024</div>
+        <div class="timeline-content">
+          <div class="timeline-role">Co-Founder &amp; CTO</div>
+          <div class="timeline-org">Venalisa Spa</div>
+          <div class="timeline-desc">
+            <ul>
+              <li>Co-founded a wellness and beauty spa, leading both technical strategy and day-to-day operations.</li>
+              <li>Developed the brand identity, digital marketing strategy, and social media presence that drove client acquisition and retention.</li>
+              <li>Managed financial planning, vendor relationships, staff hiring, and compliance with health and safety standards.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Dec 2020 — Present</div>
+        <div class="timeline-content">
+          <div class="timeline-role">Video Editor — YouTube &amp; TikTok</div>
+          <div class="timeline-org">My Channels</div>
+          <div class="timeline-desc">
+            Produced 100+ short-form TikTok videos; supported account growth to 20M+ total views and 270K+ followers. Applied storytelling, music synchronisation, and platform-native editing to drive measurable engagement — while managing YouTube content strategy and SEO in parallel.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Feb — Aug 2021</div>
+        <div class="timeline-content">
+          <div class="timeline-role">IT Support Technician</div>
+          <div class="timeline-org">Safetyplus Consulting Limited</div>
+          <div class="timeline-desc">
+            Handled hardware and software installation, configuration, and troubleshooting for the organisation's technical infrastructure.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">May — Jul 2019</div>
+        <div class="timeline-content">
+          <div class="timeline-role">IT Intern</div>
+          <div class="timeline-org">Safetyplus Consulting Limited</div>
+          <div class="timeline-desc">
+            Evaluated computer functionality, supported hardware/software configuration, and contributed to the development of a mobile application for the organisation.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- CERTS & EDUCATION -->
+  <section id="certs">
+    <div class="section-eyebrow">education &amp; certifications</div>
+    <h2>Credentials</h2>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-icon">🎓</div>
+        <div>
+          <div class="cert-name">BSc Information Technology</div>
+          <div class="cert-issuer">Multimedia University of Kenya · 2016–2020</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🛡️</div>
+        <div>
+          <div class="cert-name">Cybershujaa — Ethical Hacker</div>
+          <div class="cert-issuer">USIU-Africa · Jun 2025–Apr 2026</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🔐</div>
+        <div>
+          <div class="cert-name">Information Systems Security Certification</div>
+          <div class="cert-issuer">Cisco Networking Academy · 2025</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🌐</div>
+        <div>
+          <div class="cert-name">Networking Basics</div>
+          <div class="cert-issuer">Cisco Networking Academy</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">💻</div>
+        <div>
+          <div class="cert-name">Endpoint Security</div>
+          <div class="cert-issuer">Cisco Networking Academy</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">💳</div>
+        <div>
+          <div class="cert-name">Cybersecurity Job Simulation</div>
+          <div class="cert-issuer">Mastercard</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- CREATIVE -->
+  <section id="creative">
+    <div class="section-eyebrow">creative work</div>
+    <h2>The Other Side of the Screen</h2>
+    <div class="creative-grid">
+      <div class="creative-card">
+        <div class="creative-card-icon">📷</div>
+        <div class="creative-card-title">Photography</div>
+        <div class="creative-card-desc">5+ years shooting products, events, and portraits across Nairobi. Every frame is a composition problem — light, timing, intent.</div>
+        <div class="creative-stat">→ The Photographa</div>
+      </div>
+      <div class="creative-card">
+        <div class="creative-card-icon">🎬</div>
+        <div class="creative-card-title">Video Editing</div>
+        <div class="creative-card-desc">Short-form storytelling for TikTok and YouTube — from raw footage to scroll-stopping content with hooks, transitions, and sound design.</div>
+        <div class="creative-stat">→ 20M+ views · 270K followers</div>
+      </div>
+      <div class="creative-card">
+        <div class="creative-card-icon">🎨</div>
+        <div class="creative-card-title">Graphic Design</div>
+        <div class="creative-card-desc">Brand assets, social graphics, and print collateral built in Adobe Illustrator. Vector-first, scalable, client-ready.</div>
+        <div class="creative-stat">→ 5 years · logos, brochures, posters</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-eyebrow">contact</div>
+    <h2>Let's Work Together</h2>
+    <div class="contact-inner">
+      <p>
+        I'm actively looking for junior penetration testing and IT security opportunities. If you're building something worth protecting — or need someone who thinks like an attacker — let's talk.
+      </p>
+      <a href="mailto:mayakajustin@gmail.com" class="btn btn-primary">mayakajustin@gmail.com</a>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/mayakas" target="_blank" class="contact-link">LinkedIn</a>
+        <a href="https://tryhackme.com/p/mayakas" target="_blank" class="contact-link">TryHackMe</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Sauro Mayaka · Nairobi, Kenya</p>
+  </footer>
+
+  <script>
+    // Typing animation
+    const roles = [
+      'Jr. Penetration Tester',
+      'CTF Player',
+      'Photographer & Editor',
+      'Graphic Designer',
+      'SM Manager'
+    ];
+    let roleIdx = 0, charIdx = 0, deleting = false;
+    const el = document.getElementById('typed-role');
+
+    function type() {
+      const current = roles[roleIdx];
+      if (!deleting) {
+        el.textContent = current.slice(0, charIdx + 1);
+        charIdx++;
+        if (charIdx === current.length) {
+          deleting = true;
+          setTimeout(type, 2000);
+          return;
+        }
+      } else {
+        el.textContent = current.slice(0, charIdx - 1);
+        charIdx--;
+        if (charIdx === 0) {
+          deleting = false;
+          roleIdx = (roleIdx + 1) % roles.length;
+        }
+      }
+      setTimeout(type, deleting ? 45 : 80);
+    }
+
+    type();
+
+    // Scroll fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section, .timeline-item, .skill-group, .cert-card, .creative-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(18px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
